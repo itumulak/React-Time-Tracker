@@ -67,8 +67,8 @@
 .search-bar {
   width: 100%;
   background-color: white;
-  border: none;
-  border-radius: 2px;
+  border: 2px solid #383838;
+  border-radius: 4px;
   color: #000000;
   padding: 20px;
   font-size: 16px;
