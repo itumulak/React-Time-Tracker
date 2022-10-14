@@ -36,7 +36,6 @@ const User = ({ id }) => {
     const userTracker = usersTracker.find((userTracker) => userTracker.id == user.id);
     const dispatch = useDispatch();
     const toggleTrackerHandler = () => {
-        console.log('I was triggered', userTracker);
         dispatch(trackerActions.toggle(id));
     }
 
