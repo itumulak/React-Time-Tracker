@@ -2,7 +2,9 @@ import Head from "next/head";
 import Link from "next/link";
 import styles from "../../styles/Home.module.css";
 import styleSwitch from "../../styles/Switch.module.css";
-import {users} from "../../assets/js/data-users";
+import { users } from "../../assets/js/data-users";
+import { useSelector, useDispatch } from "react-redux";
+import { trackerActions } from "../../store/tracker-slice";
 
 export const getStaticPaths = async () => {
     const paths = users.map((user) => {
@@ -19,7 +21,7 @@ export const getStaticPaths = async () => {
     }
 }
 
-export const getStaticProps = async ({params}) => {
+export const getStaticProps = async ({ params }) => {
     return {
         props: {
             id: params.id
@@ -27,9 +29,16 @@ export const getStaticProps = async ({params}) => {
     }
 }
 
-const User = ({id}) => {
+const User = ({ id }) => {
     const userData = JSON.parse(JSON.stringify(users));
     const user = userData.find(user => user.id == id);
+    const usersTracker = useSelector(state => state.tracker);
+    const userTracker = usersTracker.find((userTracker) => userTracker.id == user.id);
+    const dispatch = useDispatch();
+    const toggleTrackerHandler = () => {
+        console.log('I was triggered', userTracker);
+        dispatch(trackerActions.toggle(id));
+    }
 
     return (
         <div className={styles.container}>
@@ -50,7 +59,7 @@ const User = ({id}) => {
                         <hr/>
                         <div className={styleSwitch['switch-wrapper']}>
                             <label className={styleSwitch.switch}>
-                                <input type="checkbox"/>
+                                <input type="checkbox" defaultChecked={userTracker.isTrackerActive} onClick={toggleTrackerHandler}/>
                                 <div className={styleSwitch.slider}></div>
                             </label>
                             Enable Tracker

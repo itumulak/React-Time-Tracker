@@ -3,8 +3,11 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import {users} from "../assets/js/data-users";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 export default function Home() {
+    const usersTracker = useSelector(state => state.tracker);
+
     return (
         <div className={styles.container}>
             <Head>
@@ -24,12 +27,14 @@ export default function Home() {
 
                 <div className={styles.grid}>
                     {users.map((user, index) => {
+                        const userTracker = usersTracker.find((userTracker) => userTracker.id == user.id);
+
                         return (
                             <Link href={`/user/${user.id}`} key={index}>
                                 <a className={styles.card}>
                                     <h2>{user.name}</h2>
                                     <p>
-                                        Time Tracker: Off
+                                        Time Tracker: {userTracker.isTrackerActive ? 'On' : 'Off'}
                                     </p>
                                 </a>
                             </Link>

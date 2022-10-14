@@ -14,10 +14,10 @@ const trackerSlice = createSlice({
     reducers: {
         toggle: (state, action) => {
             const id = action.payload;
-            const userExist = users.find(user => user.id == id);
+            const userExist = state.find(user => user.id == id);
 
             if ( userExist ) {
-                state.isTrackerActive = !state.isTrackerActive;
+                userExist.isTrackerActive = !userExist.isTrackerActive;
             }
         }
     }
