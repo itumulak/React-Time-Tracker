@@ -132,6 +132,31 @@
   line-height: 1.5;
 }
 
+.name {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.name > h2 {
+  margin-bottom: 0;
+  margin-left: 10px;
+}
+
+.tracker-active {
+  background-color: green;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.tracker-inactive {
+  background-color: red;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
 .logo {
   height: 1em;
   margin-left: 0.5rem;

@@ -4,6 +4,7 @@ import { users as DummyUsers } from "../assets/js/data-users";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import {useState} from "react";
+import Image from "next/image";
 
 export default function Home() {
     const usersTracker = useSelector(state => state.tracker);
@@ -44,9 +45,13 @@ export default function Home() {
                         return (
                             <Link href={`/user/${user.id}`} key={index}>
                                 <a className={styles.card}>
-                                    <h2>{user.name}</h2>
+                                    <div className={styles.name}>
+                                        <Image width={48} height={48} src={`https://ui-avatars.com/api/?name=${user.name}&rounded=true`}/>
+                                        <h2>{user.name}</h2>
+                                    </div>
+
                                     <p>
-                                        Time Tracker: {userTrack.isTrackerActive ? 'On' : 'Off'}
+                                        Time Tracker: <span className={userTrack.isTrackerActive ? styles['tracker-active'] : styles['tracker-inactive']}>{userTrack.isTrackerActive ? 'On' : 'Off'}</span>
                                     </p>
                                 </a>
                             </Link>
