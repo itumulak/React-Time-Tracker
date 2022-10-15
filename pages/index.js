@@ -27,14 +27,14 @@ export default function Home() {
 
                 <div className={styles.grid}>
                     {users.map((user, index) => {
-                        const userTracker = usersTracker.find((userTracker) => userTracker.id == user.id);
+                        const userTrack = usersTracker.find(userTracker => userTracker.id == user.id);
 
                         return (
                             <Link href={`/user/${user.id}`} key={index}>
                                 <a className={styles.card}>
                                     <h2>{user.name}</h2>
                                     <p>
-                                        Time Tracker: {userTracker.isTrackerActive ? 'On' : 'Off'}
+                                        Time Tracker: {userTrack.isTrackerActive ? 'On' : 'Off'}
                                     </p>
                                 </a>
                             </Link>

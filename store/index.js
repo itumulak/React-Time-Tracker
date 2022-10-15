@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from "redux-persist/lib/storage";
 import thunk from 'redux-thunk'
@@ -9,11 +9,15 @@ const persistConfig = {
     storage,
 }
 
-const persistedReducer = persistReducer(persistConfig, trackerSlice.reducer);
+const reducer = combineReducers({
+    tracker: trackerSlice.reducer
+});
+
+const persistedReducer = persistReducer(persistConfig, reducer);
 
 export const store = configureStore({
-    reducer: { tracker: persistedReducer },
+    reducer: persistedReducer,
     middleware: [thunk]
 });
 
-export const persistent = persistStore(store);
+export let persistent = persistStore(store);

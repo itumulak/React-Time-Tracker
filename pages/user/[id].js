@@ -33,7 +33,7 @@ const User = ({ id }) => {
     const userData = JSON.parse(JSON.stringify(users));
     const user = userData.find(user => user.id == id);
     const usersTracker = useSelector(state => state.tracker);
-    const userTracker = usersTracker.find((userTracker) => userTracker.id == user.id);
+    const userTrack = usersTracker.find(userTracker => userTracker.id == id);
     const dispatch = useDispatch();
     const toggleTrackerHandler = () => {
         dispatch(trackerActions.toggle(id));
@@ -58,7 +58,7 @@ const User = ({ id }) => {
                         <hr/>
                         <div className={styleSwitch['switch-wrapper']}>
                             <label className={styleSwitch.switch}>
-                                <input type="checkbox" defaultChecked={userTracker.isTrackerActive} onClick={toggleTrackerHandler}/>
+                                <input type="checkbox" defaultChecked={userTrack.isTrackerActive} onClick={toggleTrackerHandler}/>
                                 <div className={styleSwitch.slider}></div>
                             </label>
                             Enable Tracker
