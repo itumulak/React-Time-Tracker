@@ -1,12 +1,24 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import { users } from "../assets/js/data-users";
+import { users as DummyUsers } from "../assets/js/data-users";
 import Link from "next/link";
 import { useSelector } from "react-redux";
+import {useState} from "react";
 
 export default function Home() {
     const usersTracker = useSelector(state => state.tracker);
+    const [users, setUsers] = useState(DummyUsers);
+    const searchBarHandler = (event) => {
+        const value = event.target.value;
+
+        if (value.length >= 3) {
+            const filteredUsers = users.filter((user) => user.name.toLowerCase().includes(value.toLowerCase()));
+            setUsers(filteredUsers);
+        }
+        else {
+            setUsers(DummyUsers);
+        }
+    }
 
     return (
         <div className={styles.container}>
@@ -22,7 +34,7 @@ export default function Home() {
                 </h1>
 
                 <p className={styles['search-bar-wrapper']}>
-                    <input className={styles['search-bar']} type="text" placeholder="Search user..."/>
+                    <input onChange={(event) => searchBarHandler(event)} className={styles['search-bar']} type="text" placeholder="Search user..."/>
                 </p>
 
                 <div className={styles.grid}>
